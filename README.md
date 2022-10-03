@@ -7,11 +7,20 @@ The stock market has long been an area where people attempted to implement machi
 ## Methods
 ### Data Retrieval and Preprocessing
 Due to time constraints, this project only explores the implementation of stocks in the S&P 500 index. Historical daily close prices of these stocks, from 10/11/2016 to 29/4/2022, were retrieved from Yahoo Finance through the python package “yfinance”.
+<p align="center">![Screenshot 2022-10-04 at 02 10 51](https://user-images.githubusercontent.com/19373417/193648369-afc1b64d-4950-45da-b26f-c3f0179b3719.png)</p>
+
+###Feature Engineering
 Daily close prices of these stocks are then used to calculate features like 30-day volatility of the stock return, 30-day beta, which describes the expected movement of a stock relative to the market, and return of the stock in previous days. Stock code is also kept as a categorical feature for the machine learning model.
 
 ### Machine Learning
 CatboostRegressor, which is a variation of gradient boost, was used for the project due to its
-convenience in handling categorical data and ability to utilise GPU for faster training. For each trading(test) day, the past 100 days of historic data was used to train the model, where cross validation on the number of iterations was performed to prevent overfitting. The model is then used to predict the return of all stocks on that trading(test) day; and the predicted returns are used for optimising the portfolio.
+convenience in handling categorical data and ability to utilise GPU for faster training. For each trading(test) day, the past 100 days of historic data was used to train the model, where cross validation on the number of iterations was performed to prevent overfitting. The model is then used to predict the return of all stocks on that trading(test) day; and the predicted returns are used for optimising the portfolio. With more and more iterations, the result is getting more and more accurate.
+<p align="center">
+![Screenshot 2022-10-04 at 02 12 43](https://user-images.githubusercontent.com/19373417/193648668-5c85661a-00a0-4840-92f8-a9b9d7c54d5d.png)</p>
+<p align="center">
+![Screenshot 2022-10-04 at 02 13 10](https://user-images.githubusercontent.com/19373417/193648750-1ff961eb-466f-4d8f-820f-ed76ba08c780.png)</p>
+<p align="center">
+![Screenshot 2022-10-04 at 02 13 30](https://user-images.githubusercontent.com/19373417/193648799-32fd8d4c-789e-47d2-9e24-ae543767d073.png)</p>
 
 ### Optimization
 #### Black-Litterman Allocation
@@ -24,4 +33,11 @@ The BL model outputs posterior estimates of the returns and covariance matrix. T
 
 ## Result
 The simulation of trading based on the above model last year yielded a 30.9% return, which is significantly higher than the S&P return of -2.5% in the same period. The annualised IR is also at a satisfactory level of 96%. However, in terms of IR,the strategy only yielded a score of 6.5%. This means that our strategy performs better than S&P, but not very consistently.  
+<p align="center">![Screenshot 2022-10-04 at 02 14 55](https://user-images.githubusercontent.com/19373417/193649069-597b0ae4-16d2-47a0-933c-4507d9c51208.png)</p>
+
 We believe the strategy of combining machine learning and portfolio optimization has its potential, as demonstrated by the impressive 30.9% annual return. However, modification needs to be made such that it can outperform the market on a more consistent basis. Some possible methods could be incorporating more sophisticated machine learning algorithms like neural networks, or including derivatives like options as part of the portfolio optimization.
+<p align="center">
+![Screenshot 2022-10-04 at 02 15 40](https://user-images.githubusercontent.com/19373417/193649211-873d7903-8f18-4d45-bee5-7e4b3befc113.png)</p>
+
+
+
